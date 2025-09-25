@@ -4,6 +4,7 @@ import fastifySocketIO from 'fastify-socket.io';
 import {registerRoutes} from './routes/index.js';
 import { connectDB } from './config/connect.js';
 import { PORT } from './config/config.js';
+import { admin, buildAdminRouter } from './config/setup.js';
 
 
 const start = async() => {
@@ -19,12 +20,13 @@ const start = async() => {
 	});
 
 	await registerRoutes(app);
+	await buildAdminRouter(app);
 
 	app.listen({port: PORT, host: '0.0.0.0'}, (err, addr) => {
 		if(err){
 			console.log(err);
 		}else{
-			console.log(`Grocery App running on http://localhost:${PORT}`);
+			console.log(`Grocery App running on http://localhost:${PORT}${admin.options.rootPath}`);
 		}
 	});
 

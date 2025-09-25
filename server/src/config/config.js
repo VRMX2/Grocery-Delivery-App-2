@@ -19,7 +19,7 @@ sessionStore.on('error',(error)=>{
 
 export const authenticate = async (email,password)=>{
     if(email && password){
-		if(email == user.password === password){
+		if(email == 'lehcengrissi@gmail.com'.password === 'admin123'){
             return Promise.resolve({email:email,password:password});
         }else{
             return null;
